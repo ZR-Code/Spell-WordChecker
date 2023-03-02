@@ -14,10 +14,14 @@ def get_text():
     print(len(spaceless))
 
 # Visual Feautures
-text = Text(root, background="#FAF3DD", foreground="Black", insertbackground="Black", font="Roboto", height=8, width=65)
+scrollbar_tk = Scrollbar(root)
+scrollbar_tk.pack(side=RIGHT, fill=Y)
+text = Text(root, background="#FAF3DD", foreground="Black", insertbackground="Black", font="Roboto", height=8, width=65, yscrollcommand=scrollbar_tk.set)
 get_words = Button(root, text="Get Words", command=get_text).place(x=100, y=25)
 
-text.pack()
+text.pack(padx=5, pady=50)
+scrollbar_tk.config(command=text.yview)
+
 
 words = "input('What do you want to word check: ')"
 
