@@ -1,11 +1,10 @@
 # Initilizaions
 from tkinter import *
-from spellchecker import SpellChecker
+from textblob import TextBlob
 root = Tk()
 root.geometry("800x300")
 root.configure(background="#FAF3DD")
 root.resizable(False, False)
-proper_spelling = SpellChecker()
 pallete = ["FAF3DD", "17183B", "8FC0A9", "3F88C5", "F18805"]
 
 # Functions
@@ -13,10 +12,9 @@ def get_text():
     val = text.get(1.0, "end-1c")
     split = str(val).split(" ")
     spaceless = [x for x in split if x != '']
-    maybe_missed = proper_spelling.unknown(spaceless)
+    correctness = TextBlob(str(val))
+    print(correctness.correct())
     
-    for word in maybe_missed:
-        print(proper_spelling.correction(word))
 
     print(len(spaceless))
 
