@@ -1,9 +1,10 @@
 # Initilizaions
 from tkinter import *
-from textblob import TextBlob
 import customtkinter
+from gingerit.gingerit import GingerIt
 
 root = Tk()
+parser = GingerIt()
 root.title("Spell and Word Checker")
 root.geometry("800x300")
 root.configure(background="#FAF3DD")
@@ -12,13 +13,17 @@ pallete = ["FAF3DD", "17183B", "8FC0A9", "3F88C5", "F18805"]
 
 # Functions
 def get_text():
+
     val = text.get(1.0, "end-1c")
     split = str(val).split(" ")
     spaceless = [x for x in split if x != '']
-    correctness = TextBlob(str(val))
-    print(correctness.correct())
-    
-
+    correctness = parser.parse(val)
+    print(str(correctness["result"]))
+    new = Toplevel(root)
+    new.geometry("500x300")
+    new.configure(background="#FAF3DD")
+    new.title("Corrected Text")
+    Label(new, text=str(correctness["result"]), font="Roboto").pack()
     print(len(spaceless))
 
 # Visual Feautures
