@@ -2,6 +2,7 @@
 from tkinter import *
 from textblob import TextBlob
 root = Tk()
+root.title("Spell and Word Checker")
 root.geometry("800x300")
 root.configure(background="#FAF3DD")
 root.resizable(False, False)
