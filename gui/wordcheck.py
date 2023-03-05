@@ -37,15 +37,15 @@ def get_text():
                     res.append(GingerIt().parse(s)['result'])
                 fixed.append("".join(res))
     print('The Corrected sentence is: ' + ''.join(fixed))
-    print("The Length of the provided text is: " + str(len(spaceless)))
+    print("The amount of words in the text is: " + str(len(spaceless)))
 
 # Visual Feautures
 scrollbar_tk = Scrollbar(root)
 scrollbar_tk.pack(side=RIGHT, fill=Y)
-text = Text(root, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=8, width=65, yscrollcommand=scrollbar_tk.set)
-get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=345, y=200)
+text = Text(root, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45, yscrollcommand=scrollbar_tk.set)
+get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
 
-text.pack(padx=5, pady=50)
+text.pack(padx=5, pady=35, side=LEFT)
 scrollbar_tk.config(command=text.yview)
 
 root.mainloop()
