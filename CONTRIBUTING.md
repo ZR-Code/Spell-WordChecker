@@ -1,4 +1,4 @@
-#Spell And Word Checker Contributing Guide
+# Spell And Word Checker Contributing Guide
 Thank you for contributing to our project. Make sure to read through the readme to get an overview on our project. If you notice an issue, see if it already 
 exists. If it doesn't exist you may open it.
 # To Make changes
