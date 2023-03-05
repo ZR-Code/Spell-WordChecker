@@ -36,8 +36,8 @@ def get_text():
                 for s in subsegments:
                     res.append(GingerIt().parse(s)['result'])
                 fixed.append("".join(res))
-    print(''.join(fixed))
-    print(len(spaceless))
+    print('The Corrected sentence is: ' + ''.join(fixed))
+    print("The Length of the provided text is: " + str(len(spaceless)))
 
 # Visual Feautures
 scrollbar_tk = Scrollbar(root)
