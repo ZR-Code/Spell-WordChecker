@@ -1,5 +1,6 @@
 # Initilizaions
 from tkinter import *
+from tkinter import ttk
 import customtkinter
 from gingerit.gingerit import GingerIt
 import pysbd, re
@@ -13,9 +14,21 @@ root.geometry("800x300")
 root.configure(background="#FAF3DD")
 root.resizable(False, False)
 pallete = ["FAF3DD", "17183B", "8FC0A9", "3F88C5", "F18805"]
+lblfrmetext = Frame(root, background='#FAF3DD')
 
+
+# Visual Feautures
+text = Text(lblfrmetext, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
 # Functions
+def clear_text():
+
+    try:
+        text.delete("1.0", "end")
+        lblfrmeanswer.destroy()
+    except NameError:
+        text.delete("1.0", "end")
 def get_text():
+
     fixed = []
     val = text.get(1.0, "end-1c")
     split = str(val).split(" ")
@@ -37,27 +50,30 @@ def get_text():
                     res.append(GingerIt().parse(s)['result'])
                 fixed.append("".join(res))
     print('The Corrected sentence is: ' + ''.join(fixed))
-    global lblfrme
-    lblfrme = LabelFrame(root, text='Corrections + Advice', background='White')
-    og_msg = Label(lblfrme, text="The original sentence is: " + val, background='White').pack()
-    correct_msg = Label(lblfrme, text="The corrected sentence is: " + ''.join(fixed), background='White').pack()
-    words_msg = Label(lblfrme, text="The amount of words in your text is: " + str(len(spaceless)), background='White').pack()
-    lblfrme.pack(pady=35)
+    global lblfrmeanswer
+    lblfrmeanswer = Frame(root, background='White')
+    lblfrmeanswer.pack(pady=35, fill=BOTH, expand=1)
+    mycanvas = Canvas(lblfrmeanswer)
+    mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
+    scroll = ttk.Scrollbar(lblfrmeanswer, orient=VERTICAL, command=mycanvas.yview)
+    scroll.pack(side=RIGHT, fill=Y)
+    mycanvas.configure(yscrollcommand=scroll.set)
+    mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion=mycanvas.bbox("all")))
+    sec_frame = Frame(mycanvas)
+    mycanvas.create_window((0,0), window=sec_frame, anchor="nw")
+    og_msg = Message(sec_frame, text="The original sentence is: " + val, background='White').pack()
+    correct_msg = Message(sec_frame, text="The corrected sentence is: " + ''.join(fixed), background='White').pack()
+    words_msg = Label(sec_frame, text="The amount of words in your text is: " + str(len(spaceless)), background='White').pack()
+
+
+    # Scrollbar
+ 
     print("The amount of words in the text is: " + str(len(spaceless)))
-
-# Visual Feautures
-scrollbar_tk = Scrollbar(root)
-scrollbar_tk.pack(side=RIGHT, fill=Y)
-text = Text(root, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45, yscrollcommand=scrollbar_tk.set)
-def clear_text():
-    text.delete("1.0", "end")
-    lblfrme.destroy()
-
+# More Visuals
 get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
 clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
 
-
+lblfrmetext.pack(side=LEFT)
 text.pack(padx=5, pady=35, side=LEFT)
-scrollbar_tk.config(command=text.yview)
 
 root.mainloop()
