@@ -37,6 +37,7 @@ def get_text():
                     res.append(GingerIt().parse(s)['result'])
                 fixed.append("".join(res))
     print('The Corrected sentence is: ' + ''.join(fixed))
+    global lblfrme
     lblfrme = LabelFrame(root, text='Corrections + Advice', background='White')
     og_msg = Label(lblfrme, text="The original sentence is: " + val, background='White').pack()
     correct_msg = Label(lblfrme, text="The corrected sentence is: " + ''.join(fixed), background='White').pack()
@@ -48,7 +49,13 @@ def get_text():
 scrollbar_tk = Scrollbar(root)
 scrollbar_tk.pack(side=RIGHT, fill=Y)
 text = Text(root, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45, yscrollcommand=scrollbar_tk.set)
+def clear_text():
+    text.delete("1.0", "end")
+    lblfrme.destroy()
+
 get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
+clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
+
 
 text.pack(padx=5, pady=35, side=LEFT)
 scrollbar_tk.config(command=text.yview)
