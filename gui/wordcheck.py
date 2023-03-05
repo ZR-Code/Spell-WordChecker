@@ -37,6 +37,9 @@ def get_text():
                     res.append(GingerIt().parse(s)['result'])
                 fixed.append("".join(res))
     print('The Corrected sentence is: ' + ''.join(fixed))
+    og_msg = Message(root, text="The original sentence is: " + val).pack()
+    correct_msg = Message(root, text="The corrected sentence is: " + ''.join(fixed)).pack()
+    words_msg = Message(root, text="The amount of words in your text is: " + str(len(spaceless))).pack()
     print("The amount of words in the text is: " + str(len(spaceless)))
 
 # Visual Feautures
