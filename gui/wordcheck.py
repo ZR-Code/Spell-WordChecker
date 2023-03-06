@@ -4,6 +4,8 @@ from tkinter import ttk
 import customtkinter
 from gingerit.gingerit import GingerIt
 import pysbd, re
+from PIL import Image, ImageTk
+
 
 root = Tk()
 parser = GingerIt()
@@ -12,14 +14,18 @@ subsegment_re = r'[^;:\n•]+[;,:\n•]?\s*'
 root.title("Spell and Word Checker")
 root.geometry("800x300")
 root.configure(background="#FAF3DD")
-root.resizable(True, False)
+root.resizable(False, False)
 pallete = ["FAF3DD", "17183B", "8FC0A9", "3F88C5", "F18805"]
+labelframeinput = LabelFrame(text="Your original text", background="#FAF3DD")
 
 
 # Visual Feautures
-
-text = Text(root, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
+expand = Image.open("/Users/zaidr/Desktop/Coding/Word-Amount/icons/expand.png")
+expand_size = expand.resize((25, 25))
+expand_actual = ImageTk.PhotoImage(expand_size)
 # Functions
+def expand_area():
+    new = Toplevel(root)
 def clear_text():
 
     try:
@@ -53,9 +59,9 @@ def get_text():
 
     # Scrollbar
     global lblfrmeanswer
-    lblfrmeanswer = Frame(root, background='White')
+    lblfrmeanswer = LabelFrame(root, text="Corrections and Amount of words", background='White')
     lblfrmeanswer.pack(pady=35, fill=BOTH, expand=1)
-    mycanvas = Canvas(lblfrmeanswer)
+    mycanvas = Canvas(lblfrmeanswer, background="White")
     mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
     scroll = ttk.Scrollbar(lblfrmeanswer, orient=VERTICAL, command=mycanvas.yview)
     scroll.pack(side=RIGHT, fill=Y)
@@ -65,9 +71,7 @@ def get_text():
     mycanvas.create_window((0,0), window=sec_frame, anchor="nw")
     correct_msg = Message(sec_frame, text="The corrected sentence is: " + ''.join(fixed), background='White').pack()
     words_msg = Label(sec_frame, text="The amount of words in your text is: " + str(len(spaceless)) + '\n' + '\n', background='White').pack()
-    # Visuals
-    og = Label(text="Original Text", font=("Calibri", 18), background="#FAF3DD").place(x=145, y=7)
-    after = Label(text="Corrected Text and Word Amount", font=("Calibri", 18), background="#FAF3DD").place(x=500, y=7)
+
 
 
  
@@ -75,7 +79,12 @@ def get_text():
 # More Visuals
 get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
 clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
+text = Text(labelframeinput, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
+expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expand_area).place(x=650, y=268)
+expand_left = Button(root, text="expand", image=expand_actual, compound=LEFT, command= expand_area).place(x=50, y=268)
 
-text.pack(padx=5, pady=35, side=LEFT)
+
+labelframeinput.pack(padx=5, pady=35, side=LEFT)
+text.pack(padx=2, pady=10, side=LEFT)
 
 root.mainloop()
