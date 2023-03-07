@@ -26,6 +26,10 @@ expand_actual = ImageTk.PhotoImage(expand_size)
 # Functions
 def expand_area():
     new = Toplevel(root)
+    new.geometry("1440x550")
+    new.configure(background="#FAF3DD")
+    new.resizable(False, False)
+    Message(new, text=text.get(1.0, "end-1c"), font="Roboto", background="#FAF3DD").pack(side=LEFT)
 def clear_text():
 
     try:
