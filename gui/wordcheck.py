@@ -90,7 +90,10 @@ class Expand:
         new_out.geometry("1440x550")
         new_out.configure(background="#FAF3DD")
         new_out.resizable(False, False)
-        Message(new_out, text=''.join(fixed), font="Roboto", foreground="Black", background="#FAF3DD").pack(side=LEFT)
+        try:
+            Message(new_out, text=''.join(fixed), font="Roboto", foreground="Black", background="#FAF3DD").pack(side=LEFT)
+        except NameError:
+            print("Press Submit before you press this button")
 
 
 expand_area = Expand("Out")
