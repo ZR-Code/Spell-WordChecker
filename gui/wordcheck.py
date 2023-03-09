@@ -85,17 +85,23 @@ class Expand:
         new.configure(background="#FAF3DD") 
         new.resizable(False, False)
         Message(new, text=text.get(1.0, "end-1c"), font="Roboto", background="#FAF3DD", foreground="Black").pack(side=LEFT)
+    def expand_out(self):
+        new_out = Toplevel(root)
+        new_out.geometry("1440x550")
+        new_out.configure(background="#FAF3DD")
+        new_out.resizable(False, False)
+        Message(new_out, text=''.join(fixed), font="Roboto", foreground="Black", background="#FAF3DD").pack(side=LEFT)
 
 
 expand_area = Expand("Out")
-
+expanding_out = Expand("In")
 
 
 # More Visuals
 get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
 clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
 text = Text(labelframeinput, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
-expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expand_area.expand_in).place(x=650, y=268)
+expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expanding_out.expand_out).place(x=650, y=268)
 expand_left = Button(root, text="expand", image=expand_actual, compound=LEFT, command= expand_area.expand_in).place(x=50, y=268)
 
 
