@@ -75,19 +75,34 @@ def get_text():
  
     print("The amount of words in the text is: " + str(len(spaceless)))
 
+class Scroll:
+    def __init__(self, scrollableObject):
+        self.scrollableObject = scrollableObject
+    def y_expand(self, scrollableObject):
+        newcanvas = Canvas(scrollableObject, background="White")
+        newcanvas.pack(side=RIGHT, fill=BOTH, expand=1)
+        scrolling = ttk.Scrollbar(scrollableObject, orient=VERTICAL, command=newcanvas.yview)
+        scrolling.pack(side=RIGHT, fill=Y)
+        newcanvas.configure(yscrollcommand=scrolling.set)
+        newcanvas.bind('<Configure>', lambda e: newcanvas.configure(scrollregion=newcanvas.bbox("all")))
+        new_frame = Frame(newcanvas, background="White")
+        newcanvas.create_window((0,0), window=new_frame, anchor="nw")
+
+
+
 class Expand:
     def __init__(self, inOrOut):
         self.inOrOut = inOrOut
     def expand_in(self):
 
         new = Toplevel(root)
-        new.geometry("1440x550")
+        new.geometry("800x550")
         new.configure(background="#FAF3DD") 
         new.resizable(False, False)
         Message(new, text=text.get(1.0, "end-1c"), font="Roboto", background="#FAF3DD", foreground="Black").pack(side=LEFT)
     def expand_out(self):
         new_out = Toplevel(root)
-        new_out.geometry("1440x550")
+        new_out.geometry("800x550")
         new_out.configure(background="#FAF3DD")
         new_out.resizable(False, False)
         try:
