@@ -57,7 +57,7 @@ def get_text():
 
     # Scrollbar
     global lblfrmeanswer
-    lblfrmeanswer = LabelFrame(root, text="Corrections and Amount of words", background='White', foreground="Black")
+    lblfrmeanswer = LabelFrame(root, text="Corrections and Amount of words", background='#FAF3DD', foreground="Black")
     lblfrmeanswer.pack(pady=35, fill=BOTH, expand=1)
     mycanvas = Canvas(lblfrmeanswer, background="White")
     mycanvas.pack(side=LEFT, fill=BOTH, expand=1)
@@ -76,30 +76,32 @@ def get_text():
     print("The amount of words in the text is: " + str(len(spaceless)))
 
 class Scroll:
-    def __init__(self, scrollableObject):
+    def __init__(self, scrollableObject, text_for_msg):
         self.scrollableObject = scrollableObject
-    def y_expand(self, scrollableObject):
+        self.text_for_msg = text_for_msg
+    def y_expand(self, scrollableObject, text_for_msg):
+        scrollableObject.pack(pady=35, fill=BOTH, expand=1)
         newcanvas = Canvas(scrollableObject, background="White")
         newcanvas.pack(side=RIGHT, fill=BOTH, expand=1)
         scrolling = ttk.Scrollbar(scrollableObject, orient=VERTICAL, command=newcanvas.yview)
         scrolling.pack(side=RIGHT, fill=Y)
         newcanvas.configure(yscrollcommand=scrolling.set)
         newcanvas.bind('<Configure>', lambda e: newcanvas.configure(scrollregion=newcanvas.bbox("all")))
-        new_frame = Frame(newcanvas, background="White")
+        new_frame = Frame(newcanvas, background="#FAF3DD")
         newcanvas.create_window((0,0), window=new_frame, anchor="nw")
+        Message(new_frame, text=text_for_msg, font="Roboto", background="#FAF3DD", foreground="Black").pack(side=LEFT)
 
 
-
-class Expand:
-    def __init__(self, inOrOut):
-        self.inOrOut = inOrOut
+class Expand():
     def expand_in(self):
 
         new = Toplevel(root)
         new.geometry("800x550")
         new.configure(background="#FAF3DD") 
         new.resizable(False, False)
-        Message(new, text=text.get(1.0, "end-1c"), font="Roboto", background="#FAF3DD", foreground="Black").pack(side=LEFT)
+        labelmes = LabelFrame(new, background="#FAF3DD")
+        uniscroll = Scroll(labelmes, text.get(1.0, "end-1c"))
+        Scroll.y_expand(self, labelmes, text.get(1.0, "end-1c"))
     def expand_out(self):
         new_out = Toplevel(root)
         new_out.geometry("800x550")
@@ -111,15 +113,15 @@ class Expand:
             print("Press Submit before you press this button")
 
 
-expand_area = Expand("Out")
-expanding_out = Expand("In")
+expand_area = Expand()
+
 
 
 # More Visuals
 get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
 clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
 text = Text(labelframeinput, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
-expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expanding_out.expand_out).place(x=650, y=268)
+expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expand_area.expand_out).place(x=650, y=268)
 expand_left = Button(root, text="expand", image=expand_actual, compound=LEFT, command= expand_area.expand_in).place(x=50, y=268)
 
 
