@@ -20,7 +20,7 @@ labelframeinput = LabelFrame(text="Your original text", background="#FAF3DD", fo
 
 
 # Visual Feautures
-expand = Image.open("/Users/zaidr/Desktop/Coding/Word-Amount/icons/expand.png")
+expand = Image.open("/Users/zaidr/Desktop/Coding/Word-Amount/gui/expand.png")
 expand_size = expand.resize((25, 25))
 expand_actual = ImageTk.PhotoImage(expand_size)
 # Functions
@@ -81,7 +81,7 @@ class Scroll:
         self.text_for_msg = text_for_msg
     def y_expand(self, scrollableObject, text_for_msg):
         scrollableObject.pack(pady=35, fill=BOTH, expand=1)
-        newcanvas = Canvas(scrollableObject, background="#FAF3DD")
+        newcanvas = Canvas(scrollableObject, background="White")
         newcanvas.pack(side=RIGHT, fill=BOTH, expand=1)
         scrolling = ttk.Scrollbar(scrollableObject, orient=VERTICAL, command=newcanvas.yview)
         scrolling.pack(side=RIGHT, fill=Y)
