@@ -81,7 +81,7 @@ class Scroll:
         self.text_for_msg = text_for_msg
     def y_expand(self, scrollableObject, text_for_msg):
         scrollableObject.pack(pady=35, fill=BOTH, expand=1)
-        newcanvas = Canvas(scrollableObject, background="White")
+        newcanvas = Canvas(scrollableObject, background="#FAF3DD")
         newcanvas.pack(side=RIGHT, fill=BOTH, expand=1)
         scrolling = ttk.Scrollbar(scrollableObject, orient=VERTICAL, command=newcanvas.yview)
         scrolling.pack(side=RIGHT, fill=Y)
@@ -120,8 +120,8 @@ expand_area = Expand()
 
 
 # More Visuals
-get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=1, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
-clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=1, hover_color="#e1f222").place(x=350, y =5)
+get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=2, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
+clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=2, hover_color="#e1f222", border_color="Black").place(x=350, y =5)
 text = Text(labelframeinput, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
 expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expand_area.expand_out).place(x=650, y=268)
 expand_left = Button(root, text="expand", image=expand_actual, compound=LEFT, command= expand_area.expand_in).place(x=50, y=268)
