@@ -107,8 +107,10 @@ class Expand():
         new_out.geometry("800x550")
         new_out.configure(background="#FAF3DD")
         new_out.resizable(False, False)
+        labelout = LabelFrame(new_out, background="#FAF3DD")
         try:
-            Message(new_out, text=''.join(fixed), font="Roboto", foreground="Black", background="#FAF3DD").pack(side=LEFT)
+            outscroll = Scroll(labelout, ''.join(fixed))
+            Scroll.y_expand(self, labelout, ''.join(fixed))
         except NameError:
             print("Press Submit before you press this button")
 
