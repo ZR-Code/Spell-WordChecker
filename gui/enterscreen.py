@@ -1,12 +1,30 @@
 from tkinter import *
-import customtkinter
+
 master = Tk()
-master.geometry("600x300")
-master.resizable(False, False)
 
-bg = PhotoImage(file='/Users/zaidr/Desktop/Coding/Word-Amount/pexels-resize-gradient.png')
-bg_label = Label(master, image=bg)
-bg_label.place(x=0,y=0)
 
-tutorial = customtkinter.CTkButton(master=master, text="Tutorial", fg_color=("Light blue"))
+class Newscreen:
+    def __init__(self, main):
+        self.main = main
+        main.title("Spell and Word Checker")
+        main.resizable(False, False)
+        main.geometry("600x300")
+        main.configure(background="#DAF1F7")
+
+
+        self.getstarted = Label(master,text="Get Started", background="#DAF1F7", font=("Comfortaa", 36), foreground="Black").place(x=198, y =10)
+        self.tutorial = Button(master=master, text="Tutorial", background="Orange", command=self.tut).place(x=100, y=120)
+        self.jumpin = Button(master=master, text="Jump In", bg="Light Green", command=lambda : master.quit()).place(x=350, y= 120)
+
+
+    def tut(self):
+        master.destroy()
+        new = Tk()
+        new.geometry("600x300")
+        new.title("Spell and Word Checker")
+        new.resizable(False, False)
+        new.mainloop()
+
+
+news = Newscreen(master)
 master.mainloop()
