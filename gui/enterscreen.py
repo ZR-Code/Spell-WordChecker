@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-root = Tk()
 
 class Newscreen:
     def __init__(self, main):
@@ -25,7 +24,7 @@ class Newscreen:
         style.theme_use('default')
         style.configure("Custom.TButton", background="#c2f970", foreground='Black', borderwidth='1', focuscolor='none', borderradius=15)
         style.configure("C.TButton", background="#fea82f", foreground="Black", borderwidth='1', focuscolor='none', borderradius=15)
-        
+        main.mainloop()
     def tut(self):
         self.main.destroy()
         new = Tk()
@@ -61,5 +60,3 @@ class Newscreen:
         next.place(x=510)
         new.mainloop()
 
-news = Newscreen(root)
-root.mainloop()

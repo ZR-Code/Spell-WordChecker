@@ -5,6 +5,9 @@ import customtkinter
 from gingerit.gingerit import GingerIt
 import pysbd, re
 from PIL import Image, ImageTk
+import enterscreen
+window = Tk()
+news = enterscreen.Newscreen(window)
 
 
 root = Tk()
