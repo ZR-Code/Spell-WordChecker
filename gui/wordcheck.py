@@ -1,7 +1,6 @@
 # Initilizaions
 from tkinter import *
 from tkinter import ttk
-import customtkinter
 from gingerit.gingerit import GingerIt
 import pysbd, re
 from PIL import Image, ImageTk
@@ -123,8 +122,13 @@ expand_area = Expand()
 
 
 # More Visuals
-get_words = customtkinter.CTkButton(master=root, text="Get Words", command=get_text, fg_color=('#8FC0A9'), text_color = ('Black'), border_width=2, hover_color='#F18805', border_color='Black', corner_radius=20).place(x=350, y=268)
-clear = customtkinter.CTkButton(master=root, text = "Clear Text", command=clear_text, fg_color=("#3F88C5"), text_color=("Black"), corner_radius=20, border_width=2, hover_color="#e1f222", border_color="Black").place(x=350, y =5)
+get_words = ttk.Button(master=root, text="Get Words", style="Custom.TButton", command=get_text).place(x=350, y=268)
+clear = ttk.Button(master=root, text = "Clear Text", style="C.TButton", command=clear_text).place(x=350, y =5)
+style = ttk.Style()
+style.theme_use('default')
+style.configure("Custom.TButton", background="#8FC0A9", borderwidth='1', focuscolor='none', borderradius=15)
+style.configure("C.TButton", background="#3F88C5", borderwidth='1', focuscolor="none", borderradius=15)
+
 text = Text(labelframeinput, background="White", foreground="Black", insertbackground="Black", font="Roboto", height=50, width=45)
 expand_right = Button(root, text="expand", image=expand_actual, compound=LEFT, background="#FAF3DD", command=expand_area.expand_out).place(x=650, y=268)
 expand_left = Button(root, text="expand", image=expand_actual, compound=LEFT, command= expand_area.expand_in).place(x=50, y=268)

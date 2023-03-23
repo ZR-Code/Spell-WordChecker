@@ -17,7 +17,7 @@ class Newscreen:
         self.tutorial = ttk.Button(master=main, text="Tutorial", style="Custom.TButton", command=self.tut)
         self.tutorial.place(x=100, y=120)
 
-        self.jumpin = ttk.Button(master=main, text="Jump In", style="C.TButton", command=lambda: main.quit())
+        self.jumpin = ttk.Button(master=main, text="Jump In", style="C.TButton", command=lambda: main.destroy())
         self.jumpin.place(x=350, y=120)
 
         style = ttk.Style()
